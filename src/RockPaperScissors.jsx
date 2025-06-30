@@ -14,15 +14,6 @@ const emojiMap = {
   scissors: "✌️",
 };
 
-//控制声音开始和结束
-useEffect(() => {
-  playBackground();  // 页面加载时播放
-
-  return () => {
-    stopBackground();  // 页面卸载时停止
-  };
-}, []);
-
 
 export default function RockPaperScissors() {
   const [joined, setJoined] = useState(false);
@@ -86,6 +77,16 @@ export default function RockPaperScissors() {
       socket.off("receive-name");
     };
   }, [joined, roomId, nickname]);
+
+  useEffect(() => {
+  return () => {
+    if (bgMusicRef.current) {
+      bgMusicRef.current.pause();
+      bgMusicRef.current.currentTime = 0;
+    }
+  };
+}, []);
+
 
   const handleClick = (choice) => {
     playClick();
