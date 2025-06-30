@@ -1,12 +1,16 @@
 import React from "react";
-import RockPaperScissors from './RockPaperScissors';
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./HomePage";
+import RockPaperScissors from "./RockPaperScissors";
 
 function App() {
   return (
-    <div>
-      <RockPaperScissors />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/rps" element={<RockPaperScissors />} />
+      </Routes>
+    </Router>
   );
 }
 
