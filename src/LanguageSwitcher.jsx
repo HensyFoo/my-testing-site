@@ -1,20 +1,16 @@
+// src/LanguageSwitcher.jsx
 import React from "react";
+import { Button } from "react-bootstrap";
 
-export default function LanguageSwitcher({ language, setLanguage }) {
+export default function LanguageSwitcher({ language, toggleLanguage }) {
   return (
-    <div className="d-flex justify-content-end mb-3">
-      <button
-        className={`btn btn-sm me-2 ${language === 'zh' ? 'btn-primary' : 'btn-outline-primary'}`}
-        onClick={() => setLanguage('zh')}
-      >
-        中文
-      </button>
-      <button
-        className={`btn btn-sm ${language === 'en' ? 'btn-primary' : 'btn-outline-primary'}`}
-        onClick={() => setLanguage('en')}
-      >
-        English
-      </button>
-    </div>
+    <Button
+      variant="outline-light"
+      size="sm"
+      onClick={toggleLanguage}
+      className="me-3"
+    >
+      {language === "zh" ? "English" : "中文"}
+    </Button>
   );
 }

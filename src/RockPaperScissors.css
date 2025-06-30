@@ -1,0 +1,27 @@
+/* src/RockPaperScissors.css */
+
+.rps-container {
+  /*background-image: url('/Screenshot (254).png');*/
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.rps-join-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+}
+
+.rps-join-card {
+  max-width: 400px;
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.rps-game-card {
+  background-color: rgba(255, 255, 255, 0.92);
+  max-width: 720px;
+  margin: 0 auto;
+}
