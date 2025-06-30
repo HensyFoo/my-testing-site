@@ -2,8 +2,14 @@ import React from "react";
 import { Card, Button } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import LanguageSwitcher from "./LanguageSwitcher"; // 导入组件
 
 export default function HomePage() {
+
+  //这个用来切换语言
+  const [language, setLanguage] = useState("zh");
+
   const navigate = useNavigate();
 
   const games = [
@@ -28,7 +34,13 @@ export default function HomePage() {
       backgroundSize: "cover",
       minHeight: "100vh"
     }}>
-      <h2 className="text-center text-white mb-5">🎮 欢迎来到 Foo 的小游戏平台</h2>
+        
+        <LanguageSwitcher language={language} setLanguage={setLanguage} />
+
+        <h2 className="text-center text-white mb-5">
+            {language === "zh" ? "🎮 欢迎来到 Foo 的小游戏平台" : "🎮 Welcome to Foo's Mini Game Hub"}
+        </h2>
+      
 
       <div className="row">
         {games.map((game, index) => (
