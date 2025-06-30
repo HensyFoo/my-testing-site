@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'; // 用于设定背景图样式
+import Footer from "./Footer";
+
 
 const socket = io("https://my-testing-site-1.onrender.com");
 
@@ -25,46 +27,6 @@ export default function RockPaperScissors() {
   const [opponentChoice, setOpponentChoice] = useState(null);
   const [outcome, setOutcome] = useState(null);
   const [score, setScore] = useState(0);
-
- /* useEffect(() => {
-    if (!joined || !roomId) return;
-    socket.emit("join", roomId);
-    setPlayerId(socket.id);
-    socket.emit("send-name", { roomId, name: nickname });
-
-    socket.on("player-joined", () => {
-      setOpponentJoined(true);
-    });
-
-    socket.on("player-left", () => {
-      setOpponentJoined(false);
-      setOpponentName("(等待中)");
-    });
-
-    socket.on("result", (data) => {
-      const you = data[socket.id];
-      const opponent = Object.entries(data).find(([id]) => id !== socket.id);
-      setPlayerChoice(you.choice);
-      setOpponentChoice(opponent[1].choice);
-      setOutcome(you.outcome);
-      if (you.outcome === "win") {
-        setScore((prev) => prev + 1);
-      }
-    });
-
-    socket.on("receive-name", ({ id, name }) => {
-      if (id !== socket.id) {
-        setOpponentName(name);
-      }
-    });
-
-    return () => {
-      socket.off("player-joined");
-      socket.off("player-left");
-      socket.off("result");
-      socket.off("receive-name");
-    };
-  }, [joined, roomId, nickname]); */
 
   useEffect(() => {
   if (!joined || !roomId) return;
@@ -196,6 +158,8 @@ export default function RockPaperScissors() {
           🏆 当前胜场：{score}
         </div>
       </div>
+      <Footer />
+
     </div>
   );
 }
