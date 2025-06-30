@@ -10,14 +10,14 @@ export default function HomePage() {
     {
       title: "剪刀石头布",
       description: "和朋友对战看看谁更厉害！",
-      image: "/gallery/rps.png",
+      image: "/gallery/rps.jpg",
       route: "/rps",
     },
     // 可以在这里继续添加更多游戏
     {
       title: "Coming Soon",
       description: "敬请期待更多小游戏...",
-      image: "/gallery/comingsoon.png",
+      image: "/gallery/comingsoon.jpg",
       route: "#",
     },
   ];
