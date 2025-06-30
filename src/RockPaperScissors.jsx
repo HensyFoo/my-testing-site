@@ -3,7 +3,7 @@ import io from "socket.io-client";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'; // 用于设定背景图样式
 
-const socket = io("http://localhost:4000");
+const socket = io("https://my-testing-site-1.onrender.com");
 
 const options = ["rock", "paper", "scissors"];
 const emojiMap = {
