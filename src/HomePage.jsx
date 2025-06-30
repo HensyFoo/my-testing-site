@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Button } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
 import LanguageSwitcher from "./LanguageSwitcher"; // 导入组件
 
 export default function HomePage() {

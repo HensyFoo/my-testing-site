@@ -3,7 +3,7 @@ import io from "socket.io-client";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'; // 用于设定背景图样式
 import Footer from "./Footer";
-import { playClick, playWin, playDraw, playBackground } from "./sound";
+import { playBackground, stopBackground, playClick, playWin, playDraw } from './sound';
 
 const socket = io("https://my-testing-site-1.onrender.com");
 
@@ -13,6 +13,16 @@ const emojiMap = {
   paper: "🖐️",
   scissors: "✌️",
 };
+
+//控制声音开始和结束
+useEffect(() => {
+  playBackground();  // 页面加载时播放
+
+  return () => {
+    stopBackground();  // 页面卸载时停止
+  };
+}, []);
+
 
 export default function RockPaperScissors() {
   const [joined, setJoined] = useState(false);
