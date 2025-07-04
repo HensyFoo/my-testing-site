@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./HomePage";
 import RockPaperScissors from "./RockPaperScissors";
+import TicTacToe from "./TicTacToe"; 
+import NavBar from "./NavBar"; 
+
+{/* import Layout from "./Layout"; */}
 
 function App() {
   const [language, setLanguage] = useState("zh");
@@ -12,6 +16,12 @@ function App() {
 
   return (
     <Router>
+      {/* <Layout language={language} toggleLanguage={toggleLanguage}>
+        
+      </Layout> */}
+
+      <NavBar language={language} toggleLanguage={toggleLanguage} />
+
       <Routes>
         <Route
           path="/"
@@ -31,8 +41,14 @@ function App() {
             />
           }
         />
+        <Route path="/tictactoe" element={<TicTacToe />} />
+
       </Routes>
+
+      {/* <TicTacToe /> */}
     </Router>
+
+    
   );
 }
 

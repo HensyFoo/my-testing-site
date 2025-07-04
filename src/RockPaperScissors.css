@@ -6,6 +6,7 @@
   background-position: center;
   min-height: 100vh;
   padding: 2rem;
+  padding-top: 130px;
 }
 
 .rps-join-screen {
@@ -13,6 +14,7 @@
   justify-content: center;
   align-items: center;
   min-height: 90vh;
+  margin-top: -90px;
 }
 
 .rps-join-card {

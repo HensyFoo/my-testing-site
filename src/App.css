@@ -9,6 +9,9 @@
 
 /*我加的*/
 
+.main-content-wrapper {
+  margin-top: 80px; /* 推开 NavBar 占据的高度，但不破坏背景 */
+}
 
 
 @media (prefers-reduced-motion: no-preference) {
@@ -43,4 +46,9 @@
 
 body {
   font-family: 'Poppins', sans-serif;
+}
+
+.homepage-content {
+  background: transparent !important;
+  color: white;
 }
