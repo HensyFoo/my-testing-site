@@ -20,9 +20,9 @@ export function playDraw() {
 }
 
 // 背景音乐 —— 创建一个可控的 Audio 实例
-const bgAudio = new Audio('/sounds/bg.mp3');
+const bgAudio = new Audio('/sounds/bgTTT.mp3');
 bgAudio.loop = true;
-bgAudio.volume = 0.4;
+bgAudio.volume = 0.2;
 
 export function playBackground() {
   bgAudio.play();

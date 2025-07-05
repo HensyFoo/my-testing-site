@@ -90,42 +90,77 @@ export default function RockPaperScissors({ language }) {
     minHeight: "100vh"
   }}>
       {!joined ? (
-        <div className="rps-join-screen">
-          <div className="card p-4 w-100 rps-join-card">
-            <h3 className="text-center mb-4">Foo's Mini Game</h3>
-            <h3 className="text-center mb-4">
-              {language === "zh" ? "🎮 剪刀石头帕" : "🎮 Rock Paper Scissors"}
-            </h3>
-            
-            <input
-              type="text"
-              value={nameInput}
-              onChange={(e) => setNameInput(e.target.value)}
-              className="form-control mb-3"
-              placeholder={language === "zh" ? "你的昵称" : "Your Nickname"}
-            />
-            <input
-              type="text"
-              value={roomInput}
-              onChange={(e) => setRoomInput(e.target.value)}
-              className="form-control mb-3"
-              placeholder={language === "zh" ? "房间号 (例如 100)" : "Room ID (e.g. 100)"}
-            />
-            <button
-              className="btn btn-primary w-100"
-              onClick={() => {
-                if (roomInput.trim() && nameInput.trim()) {
-                  setRoomId(roomInput);
-                  setNickname(nameInput);
-                  setJoined(true);
-                  bgMusicRef.current = playBackground();
-                }
-              }}
-            >
-              {language === "zh" ? "加入房间" : "Join Room"}
-            </button>
-          </div>
-        </div>
+      <div className="rps-join-screen position-relative">
+  {/* 🔙 返回按钮在卡片外部左上角，带图标和文字 */}
+  <button
+    className="btn btn-link d-flex align-items-center"
+    onClick={() => navigate("/")}
+    style={{
+      position: "absolute",
+      top: "30px",
+      left: "20px",
+      color: "#ffffff", // 白色字体，适合深背景
+      fontSize: "1.5rem",
+      zIndex: 10,
+      textDecoration: "none",
+      padding: "8px 12px",
+    borderRadius: "6px",
+    backgroundColor: "transparent",
+    transition: "all 0.3s ease",
+    }}
+
+     onMouseEnter={(e) => {
+    e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.85)";
+    e.currentTarget.style.color = "#000000";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.backgroundColor = "transparent";
+    e.currentTarget.style.color = "#ffffff";
+  }}
+>
+  
+
+    <i className="bi bi-box-arrow-left me-2" style={{ fontSize: "1.5rem" }}></i>
+    {language === "zh" ? "返回" : "Back"}
+  </button>
+
+
+  <div className="card p-4 w-100 rps-join-card">
+    <h3 className="text-center mb-4">Foo's Mini Game</h3>
+    <h3 className="text-center mb-4">
+      {language === "zh" ? "🎮 剪刀石头帕" : "🎮 Rock Paper Scissors"}
+    </h3>
+
+    <input
+      type="text"
+      value={nameInput}
+      onChange={(e) => setNameInput(e.target.value)}
+      className="form-control mb-3"
+      placeholder={language === "zh" ? "你的昵称" : "Your Nickname"}
+    />
+    <input
+      type="text"
+      value={roomInput}
+      onChange={(e) => setRoomInput(e.target.value)}
+      className="form-control mb-3"
+      placeholder={language === "zh" ? "房间号 (例如 100)" : "Room ID (e.g. 100)"}
+    />
+    <button
+      className="btn btn-primary w-100"
+      onClick={() => {
+        if (roomInput.trim() && nameInput.trim()) {
+          setRoomId(roomInput);
+          setNickname(nameInput);
+          setJoined(true);
+          bgMusicRef.current = playBackground();
+        }
+      }}
+    >
+      {language === "zh" ? "加入房间" : "Join Room"}
+    </button>
+  </div>
+</div>
+
       ) : (
         <div className="card p-4 shadow-sm rps-game-card">
           <h4 className="text-center mb-3">

@@ -4,6 +4,13 @@ import io from "socket.io-client";
 import { useNavigate } from "react-router-dom";
 import "./TicTacToe.css";
 import Footer from "./Footer";
+import {
+  playBackground,
+  stopBackground,
+  playClick,
+  playWin,
+  playDraw,
+} from "./SoundForTTT";
 
 // ✅ 创建 socket 实例，只创建一次（单例）
 const socket = io("https://my-testing-site-1.onrender.com");
@@ -43,12 +50,11 @@ export default function TicTacToe({ language }) {
 
     socket.emit("join", roomId);
 
-    // ✅ 发送昵称（不用放在 on connect）
+    // ✅ 发送昵称
     socket.emit("send-name", { roomId, name: nickname });
 
     socket.on("player-symbol", (symbol) => {
       console.log("🎯 You are assigned:", symbol);
-      console.log("🎯 Received player symbol:", symbol);  // 加这个
       setPlayerSymbol(symbol);
     });
 
@@ -60,12 +66,15 @@ export default function TicTacToe({ language }) {
     });
 
     socket.on("update-board", ({ squares, currentTurn }) => {
-      console.log("🎯 update-board received"); 
       console.log("🧩 Board update received:", squares);
       setSquares(squares);
       setCurrentTurn(currentTurn);
       const win = calculateWinner(squares);
       setWinner(win);
+      if (win) {
+        if (win === playerSymbol) playWin();
+        else playDraw();
+      }
     });
 
     socket.on("reset-board", () => {
@@ -82,15 +91,20 @@ export default function TicTacToe({ language }) {
     };
   }, [joined, roomId, nickname]);
 
+  useEffect(() => {
+    if (joined) {
+      playBackground();
+    }
+    return () => stopBackground();
+  }, [joined]);
+
   // ✅ 玩家点击格子
   const handleClick = (index) => {
     if (squares[index] || winner || currentTurn !== playerSymbol) return;
-
     const newSquares = squares.slice();
     newSquares[index] = playerSymbol;
     const newTurn = playerSymbol === "X" ? "O" : "X";
-
-    console.log("🟢 Sending move:", newSquares);
+    playClick();
     socket.emit("move", { roomId, squares: newSquares, currentTurn: newTurn });
   };
 
@@ -99,9 +113,50 @@ export default function TicTacToe({ language }) {
   };
 
   return (
-    <div className="ttt-container">
+    <div
+      className="ttt-container"
+      style={{
+        backgroundImage: "url('/Screenshot (254).png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        minHeight: "100vh",
+      }}
+    >
       {!joined ? (
-        <div className="ttt-join-screen">
+
+        <div className="ttt-join-screen position-relative">
+          {/* 🔙 返回按钮在卡片外部左上角，带图标和文字 */}
+  <button
+    className="btn btn-link d-flex align-items-center"
+    onClick={() => navigate("/")}
+    style={{
+      position: "absolute",
+      top: "30px",
+      left: "20px",
+      color: "#ffffff", // 白色字体，适合深背景
+      fontSize: "1.5rem",
+      zIndex: 10,
+      textDecoration: "none",
+      padding: "8px 12px",
+    borderRadius: "6px",
+    backgroundColor: "transparent",
+    transition: "all 0.3s ease",
+    }}
+
+     onMouseEnter={(e) => {
+    e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.85)";
+    e.currentTarget.style.color = "#000000";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.backgroundColor = "transparent";
+    e.currentTarget.style.color = "#ffffff";
+  }}
+>
+  
+
+    <i className="bi bi-box-arrow-left me-2" style={{ fontSize: "1.5rem" }}></i>
+    {language === "zh" ? "返回" : "Back"}
+  </button>
           <div className="card p-4 w-100 ttt-join-card">
             <h3 className="text-center mb-4">Tic Tac Toe Online</h3>
             <input
@@ -168,7 +223,7 @@ export default function TicTacToe({ language }) {
               🏠 Back
             </button>
           </div>
-
+          <br />
           <Footer />
         </div>
       )}
